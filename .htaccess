@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On 
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f  
+
+#RewriteRule ^([0-9a-zA-Z]*)$ index.php/index?key=$1 [NC]
+RewriteRule ^(.+)$ index.php/index?key=$1 [L,QSA]
+</IfModule>

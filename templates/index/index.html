@@ -1,0 +1,34 @@
+{include file="_header.html"}
+{include file="_menu.html"}
+<script type="text/javascript" src="{$__ROOT__}/public/js/index.js"></script>
+
+<form action="" id="form_1" name="form_1" method="post" enctype="multipart/form-data">
+    <div class="center_box">
+        <div class="in_box">
+    		<div class="title_box">{$Lang.s_Title}</div>
+            <div class="input_box">
+            	<div class="l_box"><input type="text" name="url" id="url" value="{$url}" tabindex="1"></div>
+                <div class="r_box">
+                	<input type="button" id="sub_go" name="sub_go" value="{$Lang.sub_go_txt}" />
+                </div>
+            </div>
+            <div class="msg_box">{$Lang.s_msg}</div>
+            
+            <div class="out_box">
+                
+                <div class="new_url"><input type="text" value="{$s_url}" readonly="readonly" />
+                	<div class="qrcode"></div>
+                </div>
+                
+                <div class="m">=</div>
+                
+            </div>
+    	</div>
+        
+    </div>
+</form>   
+<script language="javascript" type="text/javascript">
+var _s_url = '{$s_url}';
+</script>
+{include file="_copyright.html"}
+{include file="_bottom.html"}

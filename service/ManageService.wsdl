@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://dbo.so/ManageService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ManageService" targetNamespace="http://dbo.so/ManageService/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://dbo.so/ManageService/">
+      <xsd:element name="Auth"  >
+        <xsd:complexType >
+          <xsd:sequence>
+          	<xsd:element name="user" type="xsd:string"  maxOccurs="1" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AuthResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="return" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetSysLogList">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetSysLogListResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="return" type="xsd:string"  minOccurs="1" maxOccurs="1"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DelSysLog">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DelSysLogResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="return" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetSysLog">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetSysLogResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="return" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      
+      
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSysLogListRequest">
+  	<wsdl:part name="parameters" element="tns:GetSysLogList"/>
+  </wsdl:message>
+  <wsdl:message name="GetSysLogListResponse">
+  	<wsdl:part name="parameters" element="tns:GetSysLogListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DelSysLogRequest">
+  	<wsdl:part name="parameters" element="tns:DelSysLog"/>
+  </wsdl:message>
+  <wsdl:message name="DelSysLogResponse">
+  	<wsdl:part name="parameters" element="tns:DelSysLogResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetSysLogRequest">
+  	<wsdl:part name="parameters" element="tns:GetSysLog"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSysLogResponse">
+  	<wsdl:part name="parameters" element="tns:GetSysLogResponse"></wsdl:part>
+  </wsdl:message>
+  
+  <wsdl:message name="SOAPAuth">
+  	<wsdl:part name="Auth" element="tns:Auth"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="ManageService">
+    <wsdl:operation name="GetSysLogList">
+    	<wsdl:documentation>取系统日志列表{pagesize,page,condition,order}</wsdl:documentation>
+    	<wsdl:input message="tns:GetSysLogListRequest"/>
+    	<wsdl:output message="tns:GetSysLogListResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="DelSysLog">
+    	<wsdl:documentation>删除系统日志{condition}</wsdl:documentation>
+    	<wsdl:input message="tns:DelSysLogRequest"/>
+    	<wsdl:output message="tns:DelSysLogResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysLog">
+    	<wsdl:documentation>取系统日志{SysLogID}</wsdl:documentation>
+    	<wsdl:input message="tns:GetSysLogRequest"></wsdl:input>
+    	<wsdl:output message="tns:GetSysLogResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppLog">
+    	<wsdl:documentation>取应用日志{AppLogID}</wsdl:documentation>
+    	<wsdl:input message="tns:GetAppLogRequest"></wsdl:input>
+    	<wsdl:output message="tns:GetAppLogResponse"></wsdl:output>
+    </wsdl:operation>
+   
+  </wsdl:portType>
+  <wsdl:binding name="ManageServiceSOAP" type="tns:ManageService">
+
+  	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="GetSysLogList">
+  		<soap:operation
+  			soapAction="http://dbo.so/ManageService/GetSysLogList" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  			<soap:header message="tns:SOAPAuth" part="Auth"
+  				use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="DelSysLog">
+  		<soap:operation
+  			soapAction="http://dbo.so/ManageService/DelSysLog" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  			<soap:header message="tns:SOAPAuth" part="Auth"
+  				use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetSysLog">
+  		<soap:operation
+  			soapAction="http://dbo.so/ManageService/GetSysLog" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  			<soap:header message="tns:SOAPAuth" part="Auth"
+  				use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	
+  </wsdl:binding>
+
+  <wsdl:service name="ManageService">
+    <wsdl:port binding="tns:ManageServiceSOAP" name="ManageServiceSOAP">
+      <soap:address location="http://dbo.so/soap/manage"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
